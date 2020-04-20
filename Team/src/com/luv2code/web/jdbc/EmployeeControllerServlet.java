@@ -39,19 +39,63 @@ public class EmployeeControllerServlet extends HttpServlet {
 		}
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// list the students ... in mvc fashion
 		try {
-			listStudents(request, response);
+			
+			// read the "command" parameter
+			String theCommand = request.getParameter("command");
+			
+			// if the command is missing, then default to listing students
+			if (theCommand == null) 
+			{
+				theCommand = "LIST";
+			}
+			
+			switch (theCommand)
+			{
+			
+			case "LIST" :
+			             listEmployees(request, response);
+			             break;
+			
+			case "ADD" :
+				        addEmployee(request, response);
+	                    break;
+	             
+	         default :    
+	        	 listEmployees(request, response);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServletException(e);
 		}			
 		
 	}
+	private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception 
+	{
+		// read student info from form data
+		        
+				String firstName = request.getParameter("firstName");
+				String lastName = request.getParameter("lastName");
+				String email = request.getParameter("email");
+				String state = request.getParameter("state");
+				
+				// create a new student object
+				Employee theEmployee = new Employee(firstName, lastName, email,state);
+				
+				// add the student to the database
+				employeeDbUtil.addEmployee(theEmployee);
+						
+				// send back to main page (the student list)
+				// SEND AS REDIRECT to avoid multiple-browser reload issue
+				listEmployees(request, response);
+		
+	}
 
-	private void listStudents(HttpServletRequest request, HttpServletResponse response) 
+	private void listEmployees(HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
 
 		// get students from db util

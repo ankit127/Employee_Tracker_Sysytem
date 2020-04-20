@@ -1,4 +1,5 @@
-<%@ page import="java.util.*, com.luv2code.web.jdbc.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.luv2code.web.jdbc.*" %>
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,8 @@
 	<link rel = "stylesheet" type = "text/css" href = "style.css" />	
 </head>
 
+
+       
 <%
 	// get the students from the request object (sent by servlet)
 	List<Employee> theStudents = 
@@ -21,10 +24,12 @@
 		</div>
 	</div>
 
+           
 	<div id="container">
 	
 		<div id="content">
 		
+		        <a href="Add_Employee.jsp">Add Employee</a>
 			<table border="3">
 			
 				<tr bgcolor="RED">
