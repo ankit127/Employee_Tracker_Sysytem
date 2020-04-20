@@ -1,4 +1,4 @@
-<%@ page import="java.util.*, com.luv2code.web.jdbc.*" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +25,7 @@
 	
 		<div id="content">
 		
+		        <a href="Add_Employee.jsp">Add Employee</a>
 			<table border="3">
 			
 				<tr bgcolor="RED">

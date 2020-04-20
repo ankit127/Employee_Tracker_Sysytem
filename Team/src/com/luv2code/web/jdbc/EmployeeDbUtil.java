@@ -5,6 +5,8 @@ package com.luv2code.web.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,9 @@ public class EmployeeDbUtil {
 			myConn = dataSource.getConnection();
 			
 			// create sql statement
-			String sql = "select * from employee order by last_name";
+		String sql = "select * from employee_det order by id";
+		
+
 			
 			myStmt = myConn.createStatement();
 			
@@ -84,6 +88,40 @@ public class EmployeeDbUtil {
 		}
 	}
 
+
+	public void addEmployee(Employee theEmployee) throws Exception {
+	
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+			// get db connection
+			myConn = dataSource.getConnection();
+			
+			// create sql for insert
+			String sql = "insert into employee_det "
+					   + "(first_name, last_name, email,state) "
+					   + "values (?, ?, ?, ?)";
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			// set the param values for the student
+			myStmt.setString(1, theEmployee.getFirstName());
+			myStmt.setString(2, theEmployee.getLastName());
+			myStmt.setString(3, theEmployee.getEmail());
+			myStmt.setString(4, theEmployee.getState());
+			
+			// execute sql insert
+			myStmt.execute();
+		}
+		finally {
+			// clean up JDBC objects
+			close(myConn, myStmt, null);
+		}
+		
+	}
+
+	
 }
 
 
