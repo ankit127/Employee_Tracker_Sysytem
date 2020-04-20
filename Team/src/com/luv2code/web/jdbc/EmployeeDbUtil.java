@@ -5,6 +5,7 @@ package com.luv2code.web.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public class EmployeeDbUtil {
 			myConn = dataSource.getConnection();
 			
 			// create sql statement
-			String sql = "select * from employee_det order by id";
+		String sql = "select * from employee_det order by id";
+		
+
 			
 			myStmt = myConn.createStatement();
 			
@@ -84,6 +87,7 @@ public class EmployeeDbUtil {
 			exc.printStackTrace();
 		}
 	}
+
 
 	public void addEmployee(Employee theEmployee) throws Exception {
 	

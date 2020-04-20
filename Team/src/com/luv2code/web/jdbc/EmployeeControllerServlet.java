@@ -40,6 +40,7 @@ public class EmployeeControllerServlet extends HttpServlet {
 	}
 	
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// list the students ... in mvc fashion
@@ -96,6 +97,21 @@ public class EmployeeControllerServlet extends HttpServlet {
 	}
 
 	private void listEmployees(HttpServletRequest request, HttpServletResponse response) 
+=======
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// list the students ... in mvc fashion
+		try {
+			listStudents(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		
+	}
+
+	private void listStudents(HttpServletRequest request, HttpServletResponse response) 
+
 		throws Exception {
 
 		// get students from db util
